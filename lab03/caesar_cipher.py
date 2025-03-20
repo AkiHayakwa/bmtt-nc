@@ -15,7 +15,7 @@ class MyApp(QMainWindow):
         url = "http://127.0.0.1:5000/api/caesar/encrypt"
         payload = {
             "plain_text": self.ui.txt_plain_text.toPlainText(), 
-            "key": self.ui.txt_key.toPlainText()  
+            "key": self.ui.txt_key.toPlainText()
         }
 
         try:
