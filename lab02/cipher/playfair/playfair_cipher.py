@@ -23,10 +23,11 @@ class PlayFairCipher:
             for col in range(len(matrix[row])):
                 if matrix[row][col] == letter:
                     return row,col
+                
     def playfair_encrypt(self,plain_text , matrix):
         plain_text = plain_text.replace("J","I")
         plain_text = plain_text.upper()
-        encrypt_text = ""
+        encrypted_text = ""
         
         for i in range(0,len(plain_text),2):
              pair = plain_text[i:i+2]
@@ -37,10 +38,11 @@ class PlayFairCipher:
              if row1 == row2:
                 encrypted_text += matrix[row1][(col1 + 1) % 5] + matrix[row2][(col2 + 1) % 5]
              elif col1 == col2:
-                 encrypt_text += matrix[(row1 + 1) % 5][col1] + matrix[(row2 + 1) % 5][col2]
+                 encrypted_text += matrix[(row1 + 1) % 5][col1] + matrix[(row2 + 1) % 5][col2]
              else:
-                 encrypt_text += matrix[row1][col2] + matrix[row2][col1]
-        return encrypt_text
+                 encrypted_text += matrix[row1][col2] + matrix[row2][col1]
+        return encrypted_text
+    
     def playfair_decrypt(self, cipher_text, matrix):
         cipher_text = cipher_text.upper()
         decrypted_text = "" 

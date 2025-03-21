@@ -18,7 +18,7 @@ class VigenereCipher:
         return encrypted_text
 
     def vigenere_decrypt(self, encrypted_text, key):
-        decrypted_text = ""
+        decrypted_text = []
         key_index = 0
         for char in encrypted_text:
             if char.isalpha():

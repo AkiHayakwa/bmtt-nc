@@ -1,27 +1,27 @@
-from flask import Flask, request, jsonify
-from cipher.caesar import CaesarCipher  
+# from flask import Flask, request, jsonify
+# from cipher.caesar import CaesarCipher  
 
-app = Flask(__name__)
-caesar_cipher = CaesarCipher()
+# app = Flask(__name__)
+# caesar_cipher = CaesarCipher()
 
-@app.route("/api/caesar/encrypt", methods=["POST"])
-def caesar_encrypt():
-    data = request.json
-    plain_text = data['plain_text']
-    key = int(data['key']) 
-    encrypted_text = caesar_cipher.encrypt(plain_text, key)  
-    return jsonify({"encrypted_message": encrypted_text})
+# @app.route('/api/caesar/encrypt', methods=['POST'])
+# def caesar_encrypt():
+#     data = request.json
+#     plain_text = data['plain_text']
+#     key = int(data['key']) 
+#     encrypted_text = caesar_cipher.encrypt(plain_text, key)  
+#     return jsonify({"encrypted_message": encrypted_text})
 
-@app.route("/api/caesar/decrypt", methods=["POST"])
-def caesar_decrypt():
-    data = request.json
-    cipher_text = data['cipher_text']
-    key = int(data['key'])
-    decrypted_text = caesar_cipher.decrypt(cipher_text, key) 
-    return jsonify({"decrypted_message": decrypted_text})
+# @app.route('/api/caesar/decrypt', methods=['POST'])
+# def caesar_decrypt():
+#     data = request.json
+#     cipher_text = data['cipher_text']
+#     key = int(data['key'])
+#     decrypted_text = caesar_cipher.decrypt(cipher_text, key) 
+#     return jsonify({"decrypted_message": decrypted_text})
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+# if __name__ == "__main__":
+#     app.run(host="0.0.0.0", port=5000, debug=True)
 
 # from flask import Flask, request, jsonify
 # from cipher.vigenere import VigenereCipher
@@ -73,16 +73,17 @@ if __name__ == "__main__":
 #     app.run(host="0.0.0.0", port=5000, debug=True)
 
 # from flask import Flask, request, jsonify
-# from cipher.playfair import PlayfairCipher
+# from cipher.playfair import PlayFairCipher
 
-# playfair_cipher = PlayfairCipher()
+# playfair_cipher = PlayFairCipher()
 # app = Flask(__name__)
-# @app.route('api/playfair/encrypt', methods=['POST'])
+# @app.route('/api/playfair/creatematrix', methods=['POST'])
 # def playfair_creatematrix():
 #     data = request.json
 #     key = data['key']
 #     playfair_matrix = playfair_cipher.create_playfair_matrix(key)
 #     return jsonify({"playfair_matrix": playfair_matrix})
+
 # @app.route('/api/playfair/encrypt', methods=['POST'])
 # def playfair_encrypt():
 #     data = request.json
@@ -91,6 +92,7 @@ if __name__ == "__main__":
 #     playfair_matrix = playfair_cipher.create_playfair_matrix(key)
 #     encrypted_text = playfair_cipher.playfair_encrypt(plain_text, playfair_matrix)
 #     return jsonify({"encrypted_message": encrypted_text})
+
 # @app.route('/api/playfair/decrypt', methods=['POST'])
 # def playfair_decrypt():
 #     data = request.json
@@ -103,25 +105,28 @@ if __name__ == "__main__":
 # if __name__ == "__main__":
 #     app.run(host="0.0.0.0", port=5000, debug=True)
 
-# from flask import Flask, request, jsonify
-# from cipher.transposition import TranspositionCipher
+from flask import Flask, request, jsonify
+from cipher.transposition import TranspositionCipher
 
-# transposition_cipher = TranspositionCipher()
-# app = Flask(__name__)
-# @app.route('/api/transposition/encrypt', methods=['POST'])
-# def transposition_encrypt():
-#     data = request.get_json()
-#     plain_text = data.get('plain_text')
-#     key = int(data.get('key'))
-#     encrypted_text = transposition_cipher.encrypt(plain_text, key)
-#     return jsonify({"encrypted_message": encrypted_text})
-# @app.route('/api/transposition/decrypt', methods=['POST'])
-# def transposition_decrypt():
-#     data = request.get_json()
-#     cipher_text = data.get('cipher_text')
-#     key = int(data.get('key'))
-#     decrypted_text = transposition_cipher.decrypt(cipher_text, key)
-#     return jsonify({"decrypted_message": decrypted_text})
+transposition_cipher = TranspositionCipher()
+app = Flask(__name__)
 
-# if __name__ == "__main__":
-#     app.run(host="0.0.0.0", port=5000, debug=True)
+@app.route('/api/transposition/encrypt', methods=['POST'])
+def transposition_encrypt():
+    data = request.get_json()
+    plain_text = data.get('plain_text')
+    key = int(data.get('key'))
+    encrypted_text = transposition_cipher.encrypt(plain_text, key)
+    return jsonify({"encrypted_message": encrypted_text})
+
+@app.route('/api/transposition/decrypt', methods=['POST'])
+def transposition_decrypt():
+    data = request.get_json()
+    cipher_text = data.get('cipher_text')
+    key = int(data.get('key'))
+    # Giả sử transposition_cipher là một instance của class chứa phương thức decrypt
+    decrypted_text = transposition_cipher.decrypt(cipher_text, key)
+    return jsonify({"decrypted_text": decrypted_text})
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000, debug=True)
